@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.pytest_cache/
+# raw HTML caches are large (~250 MB); re-create with `python src/scrape.py ...`
+data/raw/html/
+data/raw/investorgain/html/
+data/raw/kaggle/
+catboost_info/
+models/*.pkl.tmp
+node_modules/
+.next/
+.vercel
+.env
+.env.local
