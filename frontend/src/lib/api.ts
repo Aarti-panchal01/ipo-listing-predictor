@@ -1,6 +1,6 @@
-// Client for the FastAPI backend on Hugging Face Spaces.
-// Free Spaces sleep when idle; the first request can take 30-60 s while the
-// container wakes up, so every call retries with backoff and reports progress.
+// Client for the FastAPI backend (a Vercel Python function).
+// Serverless functions can cold-start, so every call retries with backoff and
+// reports progress to the UI.
 
 export const API_BASE = (process.env.NEXT_PUBLIC_API_URL ?? "").replace(/\/$/, "");
 

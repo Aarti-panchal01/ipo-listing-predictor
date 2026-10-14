@@ -8,7 +8,7 @@ const STEPS = [
   ["Split by time", "Train on IPOs listed 2012-2022, validate on 2023, test once on 2024 onward. No random split: the model never sees the future."],
   ["Model", "Baselines, decision tree, extra trees, gradient boosting, XGBoost (tuned with Optuna, early stopping on 2023), TabNet and a fastai MLP, plus a validation-weighted blend."],
   ["Explain", "Exact TreeSHAP values from XGBoost for every prediction, compared against XGBoost's built-in gain/weight/cover importance and permutation importance."],
-  ["Serve", "FastAPI on Hugging Face Spaces (Docker) and this Next.js app on Vercel."],
+  ["Serve", "FastAPI as a Vercel Python function (a Dockerfile is included for container hosts) and this Next.js app on Vercel."],
 ];
 
 export default function AboutPage() {
