@@ -9,6 +9,7 @@ export type IPOInput = Record<string, number | string | null>;
 export interface Prediction {
   predicted_gain_pct: number;
   prob_positive: number;
+  decision_threshold: number;
   predicted_direction: "positive" | "flat_or_negative";
   confidence_note: string;
   model_version: string;
@@ -64,6 +65,7 @@ export interface Meta {
   sectors: string[];
   exchanges: string[];
   test_metrics: Record<string, number>;
+  decision_threshold: number;
   baseline_test_metrics: Record<string, number | string>;
   example: { company: string; listing_date: string; actual_listing_gain_pct: number; inputs: IPOInput };
   disclaimer: string;
@@ -140,4 +142,4 @@ export const predict = (body: IPOInput, onRetry?: Progress) =>
 export const explain = (body: IPOInput, onRetry?: Progress) =>
   api<Explanation>("/explain?top=12", { method: "POST", body: JSON.stringify(body) }, { onRetry });
 export const getPast = (onRetry?: Progress) =>
-  api<{ count: number; items: PastIPO[] }>("/past-ipos", {}, { onRetry });
+  api<{ count: number; decision_threshold: number; items: PastIPO[] }>("/past-ipos", {}, { onRetry });

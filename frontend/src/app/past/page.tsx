@@ -11,6 +11,7 @@ type SortKey = "listing_date" | "company" | "listing_gain_pct" | "predicted_gain
 
 export default function PastPage() {
   const [rows, setRows] = useState<PastIPO[] | null>(null);
+  const [cut, setCut] = useState(0.5);
   const [err, setErr] = useState<string | null>(null);
   const [wake, setWake] = useState<{ attempt: number; max: number } | null>(null);
   const [year, setYear] = useState("all");
@@ -21,7 +22,7 @@ export default function PastPage() {
     setErr(null);
     setRows(null);
     getPast((attempt, max) => setWake({ attempt, max }))
-      .then((d) => setRows(d.items))
+      .then((d) => { setRows(d.items); setCut(d.decision_threshold); })
       .catch((e: Error) => setErr(e.message))
       .finally(() => setWake(null));
   }, []);
@@ -41,10 +42,10 @@ export default function PastPage() {
   const stats = useMemo(() => {
     if (!filtered.length) return null;
     const mae = filtered.reduce((s, r) => s + Math.abs(r.listing_gain_pct - r.predicted_gain_pct), 0) / filtered.length;
-    const hits = filtered.filter((r) => (r.prob_positive >= 0.5) === (r.listing_gain_pct > 0)).length;
+    const hits = filtered.filter((r) => (r.prob_positive >= cut) === (r.listing_gain_pct > 0)).length;
     const pos = filtered.filter((r) => r.listing_gain_pct > 0).length;
     return { n: filtered.length, mae, hit: hits / filtered.length, pos: pos / filtered.length };
-  }, [filtered]);
+  }, [filtered, cut]);
 
   const domain = useMemo(() => {
     const v = filtered.flatMap((r) => [r.listing_gain_pct, r.predicted_gain_pct]);
@@ -148,7 +149,7 @@ export default function PastPage() {
               <tbody className="tabular">
                 {filtered.map((r) => {
                   const miss = r.listing_gain_pct - r.predicted_gain_pct;
-                  const wrong = (r.prob_positive >= 0.5) !== (r.listing_gain_pct > 0);
+                  const wrong = (r.prob_positive >= cut) !== (r.listing_gain_pct > 0);
                   return (
                     <tr key={r.ipo_id} className="border-b border-line last:border-0 hover:bg-surface-2">
                       <td className="whitespace-nowrap px-3 py-2 font-mono text-xs text-ink-2">{r.listing_date}</td>

@@ -257,11 +257,15 @@ function Result({ p, e }: { p: Prediction; e: Explanation }) {
           <p className="mt-1 text-xs text-muted">listing-day open vs issue price</p>
         </div>
         <div>
-          <p className="text-xs uppercase tracking-wider text-muted">Chance of listing above issue price</p>
+          <p className="text-xs uppercase tracking-wider text-muted">Up/down score</p>
           <p className="mt-1 font-mono text-5xl font-semibold tracking-tight">{Math.round(p.prob_positive * 100)}%</p>
           <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-surface-2" role="img" aria-label={`${Math.round(p.prob_positive * 100)} percent`}>
             <div className="h-full rounded-full bg-accent" style={{ width: `${p.prob_positive * 100}%` }} />
           </div>
+          <p className="mt-1 text-xs text-muted">
+            Calls {p.predicted_direction === "positive" ? "an up" : "a flat or down"} listing: the cut-off is{" "}
+            {Math.round(p.decision_threshold * 100)}%, chosen on 2023 IPOs. The score ranks IPOs well but is not a calibrated probability.
+          </p>
         </div>
         <div className="text-sm text-ink-2">
           <p className="text-xs uppercase tracking-wider text-muted">How much to trust this</p>
