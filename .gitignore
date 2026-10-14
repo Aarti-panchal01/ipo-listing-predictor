@@ -14,5 +14,4 @@ node_modules/
 .vercel
 .env
 .env.local
-nb02.log
-nb03.log
+nb0*.log
