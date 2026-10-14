@@ -66,7 +66,7 @@ export default function AboutPage() {
       <section>
         <h2 className="text-xl font-semibold">Limitations</h2>
         <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm text-ink-2">
-          <li>Small data: a few hundred mainboard IPOs. Errors of 10-15 percentage points are typical, and big surprises are common.</li>
+          <li>Small data: about 600 mainboard IPOs. On the 2024+ test IPOs the average miss is about 20 percentage points, no better than always guessing the typical gain on that measure; the model only helps on the big listings (lower RMSE) and on ranking up vs down.</li>
           <li>Regime shifts: the 2021 and 2024 IPO waves behave differently from earlier years. The model is trained on the past.</li>
           <li>Sector comes from Yahoo Finance by NSE symbol; companies that delisted or changed symbol are &ldquo;Unknown&rdquo;.</li>
           <li>Category-wise subscription is the final-day figure; intraday bidding patterns are not used.</li>
