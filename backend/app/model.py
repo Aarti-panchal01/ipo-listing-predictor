@@ -76,6 +76,10 @@ class Model:
             notes.append("The gain model and the up/down model disagree on direction, so treat this one as low confidence.")
         elif abs(prob - cut) < 0.03:
             notes.append(f"The up/down score is right at the decision cut-off ({cut:.2f}), so the direction is close to a coin flip.")
+        missing = [k for k in ("qib_x", "nii_x", "retail_x") if payload.get(k) is None]
+        if missing:
+            notes.append("Missing subscription inputs (" + ", ".join(missing) + "): the model fills these the way it learned "
+                         "from older IPOs, which can swing the estimate by many points. Enter them for a reliable number.")
         oor = self.out_of_range(raw_df.iloc[0].to_dict())
         if oor:
             notes.append("Inputs outside the range seen in training: " + ", ".join(oor) + ". Extrapolation is unreliable.")
