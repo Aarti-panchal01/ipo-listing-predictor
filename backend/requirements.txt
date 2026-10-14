@@ -1,6 +1,6 @@
 fastapi==0.115.11
 uvicorn==0.34.0
 pydantic==2.10.6
-xgboost==3.4.1
+xgboost-cpu==3.4.1
 pandas==2.2.3
 numpy==2.1.3
