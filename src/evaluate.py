@@ -4,8 +4,8 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 from sklearn.metrics import (
-    accuracy_score, f1_score, mean_absolute_error, mean_squared_error,
-    precision_score, r2_score, recall_score, roc_auc_score,
+    accuracy_score, balanced_accuracy_score, f1_score, mean_absolute_error, mean_squared_error,
+    precision_score, r2_score, recall_score, roc_auc_score, roc_curve,
 )
 
 
@@ -27,8 +27,15 @@ def clf_metrics(y, prob, threshold: float = 0.5) -> dict:
         "Precision": float(precision_score(y, hard, zero_division=0)),
         "Recall": float(recall_score(y, hard, zero_division=0)),
         "Accuracy": float(accuracy_score(y, hard)),
+        "Balanced_Accuracy": float(balanced_accuracy_score(y, hard)),
     }
     return out
+
+
+def youden_threshold(y, prob) -> float:
+    """Cut-off that maximises TPR - FPR. Chosen on validation data only, never on test."""
+    fpr, tpr, th = roc_curve(np.asarray(y, int), np.asarray(prob, float))
+    return float(min(th[np.argmax(tpr - fpr)], 1.0))
 
 
 def best_total_x_threshold(total_x: pd.Series, positive: pd.Series) -> float:

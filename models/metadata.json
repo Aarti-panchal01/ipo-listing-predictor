@@ -1,0 +1,374 @@
+{
+  "version": "1.0.0",
+  "example": {
+    "company": "Shah Investor's Home Ltd.",
+    "listing_date": "2026-10-06",
+    "actual_listing_gain_pct": 2.395209580838324,
+    "inputs": {
+      "qib_x": 28.0502,
+      "nii_x": 95.5394,
+      "bnii_x": 105.15,
+      "snii_x": 76.3186,
+      "retail_x": 19.2593,
+      "employee_x": null,
+      "total_x": 38.1167,
+      "issue_size_cr": 90.17,
+      "anchor_portion_cr": 27.05,
+      "price_band_upper": 167.0,
+      "lot_size": 85.0,
+      "min_investment": 14195.0,
+      "revenue_cr": 72.4,
+      "mcap_post_cr": 367.62,
+      "pat_cr": 13.11,
+      "fresh_issue_pct": 100.0,
+      "retail_reserved_pct": 35.0,
+      "listing_month": 10.0,
+      "issue_days_open": 2.0,
+      "nifty_ret_7d": -3.5243680799336152,
+      "nifty_ret_30d": -6.0628193393469925,
+      "vix_close": 13.489999771118164,
+      "ipo_heat_30d": 34.0,
+      "prev_gain_mean_90d": 17.62226852609187,
+      "prev_count_90d": 57.0,
+      "revenue_growth_pct": -23.36191383507992,
+      "pat_margin_pct": 18.24,
+      "roe_pct": 7.59,
+      "debt_equity": 0.1,
+      "pe_post": 26.94,
+      "promoter_post_pct": 62.81,
+      "promoter_dilution_pct": 21.53,
+      "exchange": "BSE,NSE",
+      "sector": "Financial Services"
+    }
+  },
+  "trained_at": "2026-10-14T04:22:07+00:00",
+  "model": "XGBoost (hist, native categorical + missing handling)",
+  "train_rows": 314,
+  "train_period": "2012-03-09 to 2023-12-29",
+  "test_rows": 290,
+  "test_period": "2024-01-16 to 2026-10-08",
+  "n_trees": {
+    "reg": 164,
+    "clf": 100
+  },
+  "clf_threshold": 0.7127639055252075,
+  "params": {
+    "reg": {
+      "objective": "reg:pseudohubererror",
+      "huber_slope": 10.0,
+      "learning_rate": 0.03,
+      "max_depth": 3,
+      "min_child_weight": 5,
+      "subsample": 0.8,
+      "colsample_bytree": 0.7,
+      "reg_lambda": 5.0,
+      "reg_alpha": 0.0
+    },
+    "clf": {
+      "objective": "binary:logistic",
+      "learning_rate": 0.011120233238466667,
+      "max_depth": 3,
+      "min_child_weight": 2,
+      "subsample": 0.5743169051075395,
+      "colsample_bytree": 0.5842383380701412,
+      "reg_lambda": 30.46881511232989
+    }
+  },
+  "features": [
+    "log_qib_x",
+    "log_nii_x",
+    "log_bnii_x",
+    "log_snii_x",
+    "log_retail_x",
+    "log_employee_x",
+    "log_total_x",
+    "log_issue_size_cr",
+    "log_anchor_portion_cr",
+    "log_price_band_upper",
+    "log_lot_size",
+    "log_min_investment",
+    "log_revenue_cr",
+    "log_mcap_post_cr",
+    "slog_pat_cr",
+    "fresh_issue_pct",
+    "anchor_pct_of_issue",
+    "retail_reserved_pct",
+    "listing_month",
+    "issue_days_open",
+    "nifty_ret_7d",
+    "nifty_ret_30d",
+    "vix_close",
+    "ipo_heat_30d",
+    "prev_gain_mean_90d",
+    "prev_count_90d",
+    "revenue_growth_pct",
+    "pat_margin_pct",
+    "roe_pct",
+    "debt_equity",
+    "pe_post",
+    "promoter_post_pct",
+    "promoter_dilution_pct",
+    "exchange",
+    "sector"
+  ],
+  "raw_inputs": [
+    "qib_x",
+    "nii_x",
+    "bnii_x",
+    "snii_x",
+    "retail_x",
+    "employee_x",
+    "total_x",
+    "issue_size_cr",
+    "anchor_portion_cr",
+    "price_band_upper",
+    "lot_size",
+    "min_investment",
+    "revenue_cr",
+    "mcap_post_cr",
+    "pat_cr",
+    "fresh_issue_pct",
+    "anchor_pct_of_issue",
+    "retail_reserved_pct",
+    "listing_month",
+    "issue_days_open",
+    "nifty_ret_7d",
+    "nifty_ret_30d",
+    "vix_close",
+    "ipo_heat_30d",
+    "prev_gain_mean_90d",
+    "prev_count_90d",
+    "revenue_growth_pct",
+    "pat_margin_pct",
+    "roe_pct",
+    "debt_equity",
+    "pe_post",
+    "promoter_post_pct",
+    "promoter_dilution_pct",
+    "exchange",
+    "sector"
+  ],
+  "categories": {
+    "exchange": [
+      "BSE,NSE",
+      "NSE",
+      "BSE",
+      "Other"
+    ],
+    "sector": [
+      "Basic Materials",
+      "Communication Services",
+      "Consumer Cyclical",
+      "Consumer Defensive",
+      "Energy",
+      "Financial Services",
+      "Healthcare",
+      "Industrials",
+      "Real Estate",
+      "Technology",
+      "Utilities",
+      "Unknown"
+    ]
+  },
+  "ranges": {
+    "qib_x": {
+      "min": 0.0,
+      "max": 220.69,
+      "median": 16.05
+    },
+    "nii_x": {
+      "min": 0.03,
+      "max": 975.87,
+      "median": 15.785
+    },
+    "bnii_x": {
+      "min": 0.0,
+      "max": 360.95,
+      "median": 18.835
+    },
+    "snii_x": {
+      "min": 0.0,
+      "max": 442.37,
+      "median": 14.915
+    },
+    "retail_x": {
+      "min": 0.03,
+      "max": 374.84,
+      "median": 5.165
+    },
+    "employee_x": {
+      "min": 0.0,
+      "max": 96.65,
+      "median": 1.4049999999999998
+    },
+    "total_x": {
+      "min": 0.75,
+      "max": 337.86,
+      "median": 14.8
+    },
+    "issue_size_cr": {
+      "min": 23.37,
+      "max": 20557.23,
+      "median": 636.485
+    },
+    "anchor_portion_cr": {
+      "min": 13.903312,
+      "max": 8235.00009,
+      "median": 242.1349962
+    },
+    "price_band_upper": {
+      "min": 19.0,
+      "max": 2150.0,
+      "median": 332.5
+    },
+    "lot_size": {
+      "min": 6.0,
+      "max": 780.0,
+      "median": 44.0
+    },
+    "min_investment": {
+      "min": 5400.0,
+      "max": 15000.0,
+      "median": 14700.0
+    },
+    "revenue_cr": {
+      "min": 2.55,
+      "max": 703709.45,
+      "median": 818.16
+    },
+    "mcap_post_cr": {
+      "min": 46.48,
+      "max": 553595.42,
+      "median": 2941.28
+    },
+    "pat_cr": {
+      "min": -1701.0,
+      "max": 2974.14,
+      "median": 63.58
+    },
+    "fresh_issue_pct": {
+      "min": 0.0,
+      "max": 100.0,
+      "median": 39.705
+    },
+    "anchor_pct_of_issue": {
+      "min": 14.043749494949497,
+      "max": 53.45243624847973,
+      "median": 29.999960612197064
+    },
+    "retail_reserved_pct": {
+      "min": 3.16,
+      "max": 69.0,
+      "median": 34.86
+    },
+    "listing_month": {
+      "min": 1.0,
+      "max": 12.0,
+      "median": 8.0
+    },
+    "issue_days_open": {
+      "min": 2.0,
+      "max": 8.0,
+      "median": 2.0
+    },
+    "nifty_ret_7d": {
+      "min": -8.278844524575945,
+      "max": 7.059246677793163,
+      "median": 0.00325746164838715
+    },
+    "nifty_ret_30d": {
+      "min": -10.654828399031135,
+      "max": 11.336858585779064,
+      "median": 1.2270892062325789
+    },
+    "vix_close": {
+      "min": 10.140000343322754,
+      "max": 31.1299991607666,
+      "median": 14.869999885559082
+    },
+    "ipo_heat_30d": {
+      "min": 0.0,
+      "max": 14.0,
+      "median": 3.0
+    },
+    "prev_gain_mean_90d": {
+      "min": -11.57458563535911,
+      "max": 91.05703486213764,
+      "median": 22.49018054207407
+    },
+    "prev_count_90d": {
+      "min": 0.0,
+      "max": 25.0,
+      "median": 8.0
+    },
+    "revenue_growth_pct": {
+      "min": -68.53581191908147,
+      "max": 2903.370786516854,
+      "median": 20.221728121305148
+    },
+    "pat_margin_pct": {
+      "min": -295.6,
+      "max": 28.14,
+      "median": 7.74
+    },
+    "roe_pct": {
+      "min": -134.0,
+      "max": 134.12,
+      "median": 21.12
+    },
+    "debt_equity": {
+      "min": -99.75,
+      "max": 48.04,
+      "median": 0.75
+    },
+    "pe_post": {
+      "min": 5.94,
+      "max": 289.8,
+      "median": 32.715
+    },
+    "promoter_post_pct": {
+      "min": 20.0,
+      "max": 96.5,
+      "median": 65.04
+    },
+    "promoter_dilution_pct": {
+      "min": 0.0,
+      "max": 55.55,
+      "median": 13.5
+    }
+  },
+  "validation_metrics_2023": {
+    "MAE": 14.811600263032403,
+    "RMSE": 22.662303885241453,
+    "R2": 0.4835407072939377,
+    "ROC_AUC": 0.8201160541586073,
+    "F1": 0.8,
+    "Precision": 0.9696969696969697,
+    "Recall": 0.6808510638297872,
+    "Accuracy": 0.7241379310344828,
+    "Balanced_Accuracy": 0.7949709864603481
+  },
+  "test_metrics": {
+    "MAE": 20.09920988929269,
+    "RMSE": 27.796765868676182,
+    "R2": 0.04886128155838554,
+    "ROC_AUC": 0.8230734154126768,
+    "F1": 0.7835616438356164,
+    "Precision": 0.8881987577639752,
+    "Recall": 0.7009803921568627,
+    "Accuracy": 0.7275862068965517,
+    "Balanced_Accuracy": 0.7458390332877336
+  },
+  "baseline_test_metrics": {
+    "model": "Baseline: median gain (7.3%) / total_x > 2.32",
+    "MAE": 18.618929674483873,
+    "RMSE": 30.059205555083395,
+    "R2": -0.11227024560618482,
+    "ROC_AUC": 0.8346443228454173,
+    "F1": 0.8385650224215246,
+    "Precision": 0.7727272727272727,
+    "Recall": 0.9166666666666666,
+    "Accuracy": 0.7517241379310344,
+    "Balanced_Accuracy": 0.6385658914728682
+  }
+}
