@@ -5,7 +5,7 @@ scikit-learn==1.6.1
 xgboost==3.4.1
 optuna==5.0.0
 shap==0.53.0
-torch==2.6.0
+torch==2.13.0
 pytorch-tabnet==4.1.0
 fastai==2.8.12
 boruta==0.4.3
