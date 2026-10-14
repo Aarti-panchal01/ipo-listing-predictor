@@ -20,12 +20,14 @@ app = FastAPI(
 
 origins = [o.strip() for o in os.getenv(
     "ALLOWED_ORIGINS",
-    "http://localhost:3000,http://127.0.0.1:3000,https://ipo-listing-predictor.vercel.app",
+    "http://localhost:3000,http://127.0.0.1:3000,"
+    "https://ipo-listing-predictor-three.vercel.app,https://ipo-listing-predictor-aarti-panchals-projects.vercel.app",
 ).split(",") if o.strip()]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
-    allow_origin_regex=os.getenv("ALLOWED_ORIGIN_REGEX", r"https://ipo-listing-predictor(-[a-z0-9-]+)?\.vercel\.app"),
+    # preview deployments of the frontend, only under this Vercel team
+    allow_origin_regex=os.getenv("ALLOWED_ORIGIN_REGEX", r"https://ipo-listing-predictor-[a-z0-9]+-aarti-panchals-projects\.vercel\.app"),
     allow_methods=["GET", "POST"],
     allow_headers=["Content-Type"],
 )

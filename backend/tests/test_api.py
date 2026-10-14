@@ -102,3 +102,16 @@ def test_cors_allows_localhost_and_blocks_others():
     assert ok.headers.get("access-control-allow-origin") == "http://localhost:3000"
     bad = client.options("/predict", headers={"Origin": "https://evil.example.com", "Access-Control-Request-Method": "POST"})
     assert "access-control-allow-origin" not in bad.headers
+
+
+def test_cors_allows_production_frontend_and_blocks_lookalikes():
+    ok = client.options("/predict", headers={"Origin": "https://ipo-listing-predictor-three.vercel.app", "Access-Control-Request-Method": "POST"})
+    assert ok.headers.get("access-control-allow-origin") == "https://ipo-listing-predictor-three.vercel.app"
+    fake = client.options("/predict", headers={"Origin": "https://ipo-listing-predictor-evil.vercel.app", "Access-Control-Request-Method": "POST"})
+    assert "access-control-allow-origin" not in fake.headers
+
+
+def test_predict_warns_when_subscription_inputs_missing():
+    minimal = {k: EXAMPLE[k] for k in ("issue_size_cr", "price_band_upper", "fresh_issue_pct", "total_x", "listing_month")}
+    note = client.post("/predict", json=minimal).json()["confidence_note"]
+    assert "Missing subscription inputs" in note and "retail_x" in note
