@@ -76,6 +76,7 @@ class IPOInput(BaseModel):
 class Prediction(BaseModel):
     predicted_gain_pct: float
     prob_positive: float
+    decision_threshold: float
     predicted_direction: Literal["positive", "flat_or_negative"]
     confidence_note: str
     model_version: str

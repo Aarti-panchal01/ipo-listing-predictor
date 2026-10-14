@@ -70,18 +70,20 @@ class Model:
         gain = float(self.reg.predict(dm)[0])
         prob = float(self.clf.predict(dm)[0])
         mae = self.meta["test_metrics"]["MAE"]
+        cut = self.meta.get("clf_threshold", 0.5)
         notes = [f"Typical error on 2024+ test IPOs is about +/-{mae:.0f} percentage points (MAE)."]
-        if (gain > 0) != (prob >= 0.5):
+        if (gain > 0) != (prob >= cut):
             notes.append("The gain model and the up/down model disagree on direction, so treat this one as low confidence.")
-        elif abs(prob - 0.5) < 0.1:
-            notes.append("Probability is close to 50%, so the direction is close to a coin flip.")
+        elif abs(prob - cut) < 0.03:
+            notes.append(f"The up/down score is right at the decision cut-off ({cut:.2f}), so the direction is close to a coin flip.")
         oor = self.out_of_range(raw_df.iloc[0].to_dict())
         if oor:
             notes.append("Inputs outside the range seen in training: " + ", ".join(oor) + ". Extrapolation is unreliable.")
         return {
             "predicted_gain_pct": round(gain, 2),
             "prob_positive": round(prob, 4),
-            "predicted_direction": "positive" if prob >= 0.5 else "flat_or_negative",
+            "decision_threshold": round(cut, 4),
+            "predicted_direction": "positive" if prob >= cut else "flat_or_negative",
             "confidence_note": " ".join(notes),
             "model_version": self.meta["version"],
         }

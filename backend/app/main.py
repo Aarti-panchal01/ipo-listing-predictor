@@ -57,6 +57,7 @@ def meta():
         "sectors": m["categories"]["sector"],
         "exchanges": [e for e in m["categories"]["exchange"] if e != "Other"],
         "test_metrics": m["test_metrics"],
+        "decision_threshold": m.get("clf_threshold", 0.5),
         "baseline_test_metrics": m["baseline_test_metrics"],
         "example": m["example"],
         "disclaimer": DISCLAIMER,
@@ -82,4 +83,4 @@ def past_ipos(year: Optional[int] = Query(None, ge=2024, le=2030), sector: Optio
         if sector not in get_model().meta["categories"]["sector"]:
             raise HTTPException(422, f"Unknown sector '{sector}'")
         rows = [r for r in rows if r["sector"] == sector]
-    return {"count": len(rows), "items": rows}
+    return {"count": len(rows), "decision_threshold": get_model().meta.get("clf_threshold", 0.5), "items": rows}

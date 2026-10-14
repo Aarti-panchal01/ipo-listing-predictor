@@ -41,6 +41,7 @@ def test_predict():
     assert -100 < body["predicted_gain_pct"] < 500
     assert 0 <= body["prob_positive"] <= 1
     assert body["predicted_direction"] in ("positive", "flat_or_negative")
+    assert body["predicted_direction"] == ("positive" if body["prob_positive"] >= body["decision_threshold"] else "flat_or_negative")
     assert body["confidence_note"]
 
 
